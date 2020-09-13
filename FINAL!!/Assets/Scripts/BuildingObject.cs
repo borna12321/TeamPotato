@@ -30,37 +30,47 @@ public class BuildingObject : MonoBehaviour
 
     private void Start()
     {
-        if(data.resourceType == Building.ResourceType.Standard || data.resourceType == Building.ResourceType.Premium)
-            buildingBehaviour = StartCoroutine(CreateResource());
+        if(data.resourceType == Building.ResourceType.Standard)
+            {buildingBehaviour = StartCoroutine(CreateResource());}
 
 
-        if (data.resourceType == Building.ResourceType.Storage)
+     
+        if (data.resourceType == Building.ResourceType.Food)
         {
-            IncreaseMaxStorage();
-            canvasObject.SetActive(false);
-            //Debug.Log("increased storage");
+            buildingBehaviour = StartCoroutine(CreateResource());
         }
     }
 
     private void OnMouseDown()
     {
-        if (data.resourceType == Building.ResourceType.Storage)
-            return;
+        if (data.resourceType == Building.ResourceType.Food)
+        {
+            ResourceManager.Instance.AddFood((int)resource);  
 
-
+        }
         switch (data.resourceType)
         {
+            case Building.ResourceType.CO2:
+           
+                ResourceManager.Instance.RemoveCO2(15);
+            
+                break;
+
             case Building.ResourceType.Standard:
 
                 ResourceManager.Instance.AddStandardC((int)resource);
+                ResourceManager.Instance.RemoveFood((int)resource/5);
 
                 break;
-            case Building.ResourceType.Premium:
 
-                ResourceManager.Instance.AddPremiumC((int)resource);
 
-                break;
+
         }
+       
+       
+
+
+        
 
         EmptyResource();
         
@@ -71,18 +81,18 @@ public class BuildingObject : MonoBehaviour
         resource = 0;
     }
 
-    void IncreaseMaxStorage()
-    {
-        switch (data.storageType)
-        {
-            case Building.StorageType.Wood:
-                ResourceManager.Instance.IncreaseMaxWood((int)resource);
-                break;
-            case Building.StorageType.Stone:
-                ResourceManager.Instance.IncreaseMaxStone((int)resource);
-                break;
-        }
-    }
+    // void IncreaseMaxStorage()
+    // {
+    //     switch (data.storageType)
+    //     {
+    //         case Building.StorageType.Wood:
+    //             ResourceManager.Instance.IncreaseMaxWood((int)resource);
+    //             break;
+    //         case Building.StorageType.Stone:
+    //             ResourceManager.Instance.IncreaseMaxStone((int)resource);
+    //             break;
+    //     }
+    // }
 
     IEnumerator CreateResource()
     {

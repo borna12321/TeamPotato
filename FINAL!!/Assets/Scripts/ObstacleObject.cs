@@ -25,12 +25,12 @@ public class ObstacleObject : MonoBehaviour
         {
             case ObstacleType.Wood:
 
-                usedResource = ResourceManager.Instance.AddWood(resourceAmount);
+                usedResource = ResourceManager.Instance.AddFood(resourceAmount);
 
                 break;
             case ObstacleType.Rock:
 
-                usedResource = ResourceManager.Instance.AddStone(resourceAmount);
+                usedResource = ResourceManager.Instance.RemoveCO2(resourceAmount);
 
                 break;
         }

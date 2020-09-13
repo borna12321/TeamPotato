@@ -197,7 +197,12 @@ public class GameManager : MonoBehaviour
 
         //Sets the correct position.
         Vector3 position = new Vector3( (sumX / tiles.Count), building.data.yPadding, (sumZ / tiles.Count));
-        ResourceManager.Instance.AddStone(-30);
+       if (building.data.resourceType == Building.ResourceType.Food)
+       {
+           ResourceManager.Instance.AddCO2(30);
+       }
+
+
         spawnedBuilding.transform.position = position;
 
         

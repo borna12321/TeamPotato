@@ -8,17 +8,17 @@ public class ResourceManager : MonoBehaviour
 
     [Space(8)]
 
+
+    public int minCO2;
+    public int maxCO2;
+    int CO2 = 0;
     //Sets the max amount of wood
-    public int maxWood;
-    int wood = 0;
+    public int minFood = 0;
+    public int maxFood;
+    public static int food = 0;
 
-    //Sets the max amount of stone
-    public int maxStone;
-    int stone = 100;
-
-    //Sets the max amount of premium currency
-    public int maxPremiumCurrency;
-    int premiumC = 0;
+ 
+  
 
     //Sets the max amount of standard currency
     public int maxStandardCurrency;
@@ -28,44 +28,32 @@ public class ResourceManager : MonoBehaviour
 
     public bool debugBool = false;
 
-    public int Wood
+    public int Co2
     {
         get
         {
-            return wood;
+            return CO2;
+        }
+        set 
+        {
+            CO2 = value;
+        }
+    }
+    public int Food
+    {
+        get
+        {
+            return food;
         }
 
         set
         {
-            wood = value;
+            food = value;
         }
     }
 
-    public int Stone
-    {
-        get
-        {
-            return stone;
-        }
 
-        set
-        {
-            stone = value;
-        }
-    }
-
-    public int PremiumC
-    {
-        get
-        {
-            return premiumC;
-        }
-
-        set
-        {
-            premiumC = value;
-        }
-    }
+   
 
     public int StandardC
     {
@@ -99,14 +87,56 @@ public class ResourceManager : MonoBehaviour
     /// Adds more wood to the inventory.
     /// </summary>
     /// <param name="amount">Amount to add directly to our existing wood</param>
-    public bool AddWood(int amount)
+    public bool AddCO2(int amount)
     {
-        if ((wood + amount) <= maxWood)
+        if ((CO2+amount)<= maxCO2)
         {
-            Wood += amount;
+            CO2+=amount;
+            UIManager.Instance.UpdateCO2UI(Co2,maxCO2);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool RemoveCO2(int amount)
+    {
+        if((CO2+amount)<= minCO2)
+        {
+            CO2 -= amount;
+            UIManager.Instance.UpdateCO2UI(Co2, maxCO2);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public bool RemoveFood(int amount)
+    {
+        
+        if ((food - amount )>=minFood)
+        {
+            food-=amount;
+            UIManager.Instance.UpdateFoodUI(Food,maxFood);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public bool AddFood(int amount)
+    {
+        if ((food + amount) <= maxFood)
+        {
+            food += amount;
 
             //Updates the corresponding UI.
-            UIManager.Instance.UpdateWoodUI(Wood, maxWood);
+            UIManager.Instance.UpdateFoodUI(Food, maxFood);
 
             return true;
         }
@@ -117,39 +147,7 @@ public class ResourceManager : MonoBehaviour
         
     }
 
-    public void IncreaseMaxWood(int amount)
-    {
-        maxWood += amount;
-
-        UIManager.Instance.UpdateWoodUI(wood, maxWood);
-    }
-
-    /// <summary>
-    /// Adds more stone to the inventory.
-    /// </summary>
-    /// <param name="amount">Amount to add directly to our existing stone</param>
-    public bool AddStone(int amount)
-    {
-        if ((stone - amount) <= maxStone)
-        {
-            Stone -= amount;
-
-            //Updates the corresponding UI.
-            UIManager.Instance.UpdateStoneUI(Stone, maxStone);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void IncreaseMaxStone(int amount)
-    {
-        maxStone += amount;
-
-        UIManager.Instance.UpdateStoneUI(stone, maxStone);
-    }
+  
 
     /// <summary>
     /// Adds more StandardC to the inventory.
@@ -177,22 +175,7 @@ public class ResourceManager : MonoBehaviour
     /// Adds more PremiumC to the inventory.
     /// </summary>
     /// <param name="amount">Amount to add directly to our existing PremiumC</param>
-    public bool AddPremiumC(int amount)
-    {
-        if ((PremiumC + amount) <= maxPremiumCurrency)
-        {
-            PremiumC += amount;
-
-            //Updates the corresponding UI.
-           // UIManager.Instance.UpdatePremiumCUI(PremiumC, maxPremiumCurrency);
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+  
 
     
 

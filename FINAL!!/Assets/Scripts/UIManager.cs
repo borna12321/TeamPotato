@@ -10,10 +10,11 @@ public class UIManager : MonoBehaviour
     [Space(8)]
 
     /* References for our containers */
-    public StandardUIReference woodUI;
-    public StandardUIReference stoneUI;
+    public StandardUIReference foodUI;
+    public StandardUIReference CO2UI;
+  
     public StandardUIReference standardCUI;
-    public StandardUIReference premiumCUI;
+   
 
     //Instance handling for singleton
     public static UIManager Instance;
@@ -34,32 +35,36 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <param name="currentAmount">sets the current amount of the slider and text</param>
     /// <param name="maxAmount">sets the maximum amount of the slider and text</param>
-    public void UpdateWoodUI(int currentAmount, int maxAmount)
+    public void UpdateFoodUI(int currentAmount, int maxAmount)
     {
         //Set the text in the UI.
-        woodUI.currentUI.text = currentAmount.ToString();
-        woodUI.maxUI.text = "MAX: " + maxAmount.ToString();
+        foodUI.currentUI.text = currentAmount.ToString();
+        foodUI.maxUI.text = "MAX: " + maxAmount.ToString();
 
         //Set the slider
-        woodUI.slider.maxValue = maxAmount;
-        woodUI.slider.value = currentAmount;
+        foodUI.slider.maxValue = maxAmount;
+        foodUI.slider.value = currentAmount;
     }
+    public void UpdateCO2UI(int currentAmount, int maxAmount)
+    {
+        
+        CO2UI.currentUI.text = currentAmount.ToString();
+        CO2UI.maxUI.text = "Max: " + maxAmount.ToString();
 
+
+        CO2UI.slider.maxValue = maxAmount;
+        CO2UI.slider.value = currentAmount;
+
+
+
+
+    }
     /// <summary>
     /// Updates the Stone UI.
     /// </summary>
     /// <param name="currentAmount">sets the current amount of the slider and text</param>
     /// <param name="maxAmount">sets the maximum amount of the slider and text</param>
-    public void UpdateStoneUI(int currentAmount, int maxAmount)
-    {
-        //Set the text in the UI.
-        stoneUI.currentUI.text = currentAmount.ToString();
-        stoneUI.maxUI.text = "MAX: " + maxAmount.ToString();
-
-        //Set the slider
-        stoneUI.slider.maxValue = maxAmount;
-        stoneUI.slider.value = currentAmount;
-    }
+  
 
     /// <summary>
     /// Updates the standard currency UI.
@@ -77,26 +82,12 @@ public class UIManager : MonoBehaviour
         standardCUI.slider.value = currentAmount;
     }
 
-    /// <summary>
-    /// Updates the premium currency UI.
-    /// </summary>
-    /// <param name="currentAmount">sets the current amount of the slider and text</param>
-    /// <param name="maxAmount">sets the maximum amount of the slider and text</param>
-    // public void UpdatePremiumCUI(int currentAmount, int maxAmount)
-    // {
-    //     //Set the text in the UI.
-    //     premiumCUI.currentUI.text = currentAmount.ToString();
-    //     premiumCUI.maxUI.text = "MAX: " + maxAmount.ToString();
 
-    //     //Set the slider
-    //     premiumCUI.slider.maxValue = maxAmount;
-    //     premiumCUI.slider.value = currentAmount;
-    // }
 
     void UpdateAll()
     {
-        UpdateWoodUI(ResourceManager.Instance.Wood, ResourceManager.Instance.maxWood);
-        UpdateStoneUI(ResourceManager.Instance.Stone, ResourceManager.Instance.maxStone);
+        UpdateFoodUI(ResourceManager.Instance.Food, ResourceManager.Instance.maxFood);
+        UpdateCO2UI(ResourceManager.Instance.Co2, ResourceManager.Instance.maxCO2);
         UpdateStandardCUI(ResourceManager.Instance.StandardC, ResourceManager.Instance.maxStandardCurrency);
        // UpdatePremiumCUI(ResourceManager.Instance.PremiumC, ResourceManager.Instance.maxPremiumCurrency);
     }

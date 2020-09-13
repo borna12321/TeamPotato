@@ -23,7 +23,7 @@ public class Building
     //Type of functionality of the building
     public ResourceType resourceType = ResourceType.None;
 
-    public StorageType storageType = StorageType.None;
+    //public StorageType storageType = StorageType.None;
 
     //[HideInInspector]
     public BuildingObject refOfBuilding;
@@ -32,14 +32,14 @@ public class Building
     {
         None,
         Standard,
-        Premium,
-        Storage
+        Food,
+        CO2
     }
 
-    public enum StorageType
-    {
-        None,
-        Wood,
-        Stone
-    }
+    // public enum StorageType
+    // {
+    //     None,
+    //     Wood,
+    //     Stone
+    // }
 }
