@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ShopUI : MonoBehaviour
+{
+
+    [SerializeField]
+    private Transform targetTransform;
+    private RectTransform rectTransform;
+
+    private Image image;
+
+
+    private void Awake()
+    {
+        
+    }
+
+    private void Update()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
+        var screenPoint = Camera.main.WorldToScreenPoint(targetTransform.position);
+        rectTransform.position = screenPoint;
+
+        var viewportPoint = Camera.main.WorldToViewportPoint(targetTransform.position);
+        var distanceFromCenter = Vector2.Distance (viewportPoint,Vector2.one * 0.5f);
+
+        var show = distanceFromCenter< 0.4f;
+
+        image.enabled= show;
+
+    }
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 230294b29b3f153498965393cd9326f8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - hmmSound: {instanceID: 0}
+  - coughSound: {fileID: 8300000, guid: cbae084c4b038f44190c977d96cfde10, type: 3}
+  - hmmSource: {instanceID: 0}
+  - coughSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
